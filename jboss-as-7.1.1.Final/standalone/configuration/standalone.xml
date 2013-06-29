@@ -100,7 +100,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
-                    <connection-url>jdbc:oracle:thin:@//23.21.229.249:1521/IAMDEV3</connection-url>
+                    <connection-url>${org.openiam.datasource.openiam.jdbc.url}</connection-url>
                     <driver>oracle.jdbc</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
                     <pool>
@@ -109,8 +109,8 @@
                         <prefill>true</prefill>
                     </pool>
                     <security>
-                        <user-name>IAMUSER</user-name>
-                        <password>iamuser</password>
+                        <user-name>${org.openiam.datasource.openiam.username}</user-name>
+                        <password>${org.openiam.datasource.openiam.password}</password>
                     </security>
                     <statement>
                         <prepared-statement-cache-size>32</prepared-statement-cache-size>
@@ -118,7 +118,7 @@
                     </statement>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
-                    <connection-url>jdbc:oracle:thin:@//23.21.229.249:1521/IAMDEV3</connection-url>
+                    <connection-url>${org.openiam.datasource.activiti.jdbc.url}</connection-url>
                     <driver>oracle.jdbc</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
                     <pool>
@@ -127,8 +127,8 @@
                         <prefill>true</prefill>
                     </pool>
                     <security>
-                        <user-name>ACTIVITI</user-name>
-                        <password>activiti</password>
+                        <user-name>${org.openiam.datasource.activiti.username}</user-name>
+                        <password>${org.openiam.datasource.activiti.password}</password>
                     </security>
                     <statement>
                         <prepared-statement-cache-size>32</prepared-statement-cache-size>
