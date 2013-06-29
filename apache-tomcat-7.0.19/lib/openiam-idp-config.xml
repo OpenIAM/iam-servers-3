@@ -1,0 +1,12 @@
+<openiam-idp-config>
+	<idp name="Primary IdP">
+		<hostName>idp.openiamdemo.com</hostName>
+		<authenticationServiceEndPoint>http://www.openiamdemo.com:8080/openiam-idm-esb/idmsrvc/AuthenticationService</authenticationServiceEndPoint>
+		<defaultAuthenticationModule>org.openiam.idm.srvc.auth.spi.DefaultLogin</defaultAuthenticationModule>
+		<loginURL>/proxyauth/login.jsp</loginURL>
+		<globalLogoutURL>/proxyauth/logout.do</globalLogoutURL>
+		<defaultProtocol>SAML 2</defaultProtocol>
+		<metadata>
+		</metadata>
+	</ipd>
+</openiam-idp-config>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:activiti="http://activiti.org/bpmn" 
+  targetNamespace="NewHire">
+
+  <process id="newHireWithApprovalProcess">
+
+    <startEvent id="start" />
+    
+    
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="sendRequests" />
+    	<serviceTask id="sendRequests" activiti:class="org.openiam.bpm.activiti.delegate.SendNewHireRequestDelegate" />
+    
+    <sequenceFlow id="flow2" sourceRef="sendRequests" targetRef="assignRequests" />
+    	<userTask id="assignRequests">
+    		<extensionElements>
+				<activiti:taskListener event="create" class="org.openiam.bpm.activiti.tasklistener.AddCandidateUsersTaskListener" />
+			</extensionElements>
+    	</userTask>
+	
+	<sequenceFlow id="flow4" sourceRef="assignRequests" targetRef="approveOrRequestGateway" />
+		<exclusiveGateway id="approveOrRequestGateway" />
+			<sequenceFlow id="gateflow1" sourceRef="approveOrRequestGateway" targetRef="acceptNewHireRequest">
+				<conditionExpression xsi:type="tFormalExpression">
+					${IsNewHireApproved}
+				</conditionExpression>
+			</sequenceFlow>
+			<serviceTask id="acceptNewHireRequest" activiti:class="org.openiam.bpm.activiti.delegate.AcceptNewHireDelegate" />
+			
+			<sequenceFlow id="gateflow2" sourceRef="approveOrRequestGateway" targetRef="rejectNewHireRequest">
+				<conditionExpression xsi:type="tFormalExpression">
+					${!IsNewHireApproved}
+				</conditionExpression>
+			</sequenceFlow>
+			<serviceTask id="rejectNewHireRequest" activiti:class="org.openiam.bpm.activiti.delegate.RejectNewHireDelegate" />
+	
+	
+	<sequenceFlow id="rejectRequestJoin" sourceRef="rejectNewHireRequest" targetRef="finish" />
+	<sequenceFlow id="acceptRequestJoin" sourceRef="acceptNewHireRequest" targetRef="finish" />
+	<endEvent id="finish" />
+	
+  </process>
+
+</definitions>

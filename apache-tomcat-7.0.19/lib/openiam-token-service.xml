@@ -1,0 +1,16 @@
+<openiam-token-service>
+	<module name="OpenIAM Token">
+		<className>org.openiam.idm.srvc.auth.sso.DefaultTokenModule</className>
+		<property name="" value="">
+	</module>
+	<module name="SAML 2">
+		<className>org.openiam.idm.srvc.auth.sso.SAML2Module</className>
+	</module>
+	<module name="SAML 1.1">
+		<className>org.openiam.idm.srvc.auth.sso.SAML2Module</className>
+	</module>
+	<module name="WS-Federation">
+		<className>org.openiam.idm.srvc.auth.sso.WSFederationModule</className>
+	</module>
+	
+</openiam-token-service>
