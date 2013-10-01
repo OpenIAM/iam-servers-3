@@ -315,6 +315,10 @@
                         <entry name="queue/mail"/>
                         <entry name="java:jboss/exported/jms/queue/mail"/>
                     </jms-queue>
+		    <jms-queue name="logQueue">
+    			<entry name="queue/log"/>
+    			<entry name="java:jboss/exported/jms/queue/log"/>
+		    </jms-queue>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
