@@ -66,6 +66,5 @@ fi
 
 # Sample JPDA settings for remote socket debugging
 #JAVA_OPTS="$JAVA_OPTS -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
-JAVA_OPTS=%JAVA_OPTS% -Xms512m -Xmx1024m -XX:ReservedCodeCacheSize=64m
 
 eval \"$JAVA\" $JAVA_OPTS -jar \"$JBOSS_HOME/jboss-modules.jar\" -mp \"$JBOSS_HOME/modules\" org.jboss.as.cli '"$@"'
