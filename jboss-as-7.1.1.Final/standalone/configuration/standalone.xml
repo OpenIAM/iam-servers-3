@@ -323,6 +323,10 @@
                         <entry name="queue/prov"/>
                         <entry name="java:jboss/exported/jms/queue/prov"/>
                     </jms-queue>
+                    <jms-queue name="subsQueue">
+                        <entry name="queue/subs"/>
+                        <entry name="java:jboss/exported/jms/queue/subs"/>
+                    </jms-queue>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
