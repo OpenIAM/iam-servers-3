@@ -90,6 +90,18 @@
             <logger category="org.activiti">
                 <level name="DEBUG"/>
             </logger>
+	    <logger category="org.apache">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.mule">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.hibernate">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.apache.cxf">
+		<level name="INFO"/>
+	    </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
