@@ -90,6 +90,18 @@
             <logger category="org.activiti">
                 <level name="DEBUG"/>
             </logger>
+	    <logger category="org.apache">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.mule">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.hibernate">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.apache.cxf">
+		<level name="INFO"/>
+	    </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
@@ -191,7 +203,7 @@
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
-            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout="120000000"/>
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" auto-deploy-zipped="false" auto-deploy-exploded="false" scan-interval="5000" deployment-timeout="120000000"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:1.2">
@@ -365,6 +377,10 @@
                     <jms-queue name="provQueue">
                         <entry name="queue/prov"/>
                         <entry name="java:jboss/exported/jms/queue/prov"/>
+                    </jms-queue>
+                    <jms-queue name="subsQueue">
+                        <entry name="queue/subs"/>
+                        <entry name="java:jboss/exported/jms/queue/subs"/>
                     </jms-queue>
                 </jms-destinations>
             </hornetq-server>

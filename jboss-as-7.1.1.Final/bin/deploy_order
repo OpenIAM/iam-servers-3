@@ -1,0 +1,10 @@
+openiam-esb.war
+openiam-subscription.war
+openiam-ui-static.war
+reportviewer.war
+idp.war
+selfservice.war
+selfservice-ext.war
+webconsole-am.war
+webconsole-idm.war
+webconsole.war

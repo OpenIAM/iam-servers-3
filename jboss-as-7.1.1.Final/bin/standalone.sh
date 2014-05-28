@@ -171,7 +171,7 @@ echo "  JAVA_OPTS: $JAVA_OPTS"
 echo ""
 echo "========================================================================="
 echo ""
-
+bash deploy.sh &
 while true; do
    if [ "x$LAUNCH_JBOSS_IN_BACKGROUND" = "x" ]; then
       # Execute the JVM in the foreground
