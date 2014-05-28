@@ -112,8 +112,45 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:configadmin:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
-            <datasources>
-                <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+              <datasources>
+                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+                    <connection-url>jdbc:mysql://localhost:3306/openiam?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
+                    <driver>com.mysql</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>200</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>idmuser</user-name>
+                        <password>idmuser</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
+                    <connection-url>jdbc:mysql://localhost:3306/activiti?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
+                    <driver>com.mysql</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>200</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>idmuser</user-name>
+                        <password>idmuser</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+              <!--
+                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
                     <connection-url>${org.openiam.datasource.openiam.jdbc.url}</connection-url>
                     <driver>oracle.jdbc</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
@@ -149,6 +186,7 @@
                         <share-prepared-statements>true</share-prepared-statements>
                     </statement>
                 </datasource>
+            -->
             <!--
                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
                     <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=openiam</connection-url>

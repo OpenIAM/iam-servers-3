@@ -1,21 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
 <server xmlns="urn:jboss:domain:1.2">
+
     <extensions>
         <extension module="org.jboss.as.clustering.infinispan"/>
-        <extension module="org.jboss.as.cmp"/>
         <extension module="org.jboss.as.configadmin"/>
         <extension module="org.jboss.as.connector"/>
         <extension module="org.jboss.as.deployment-scanner"/>
         <extension module="org.jboss.as.ee"/>
         <extension module="org.jboss.as.ejb3"/>
-        <extension module="org.jboss.as.jacorb"/>
         <extension module="org.jboss.as.jaxr"/>
         <extension module="org.jboss.as.jaxrs"/>
         <extension module="org.jboss.as.jdr"/>
         <extension module="org.jboss.as.jmx"/>
         <extension module="org.jboss.as.jpa"/>
-        <extension module="org.jboss.as.jsr77"/>
         <extension module="org.jboss.as.logging"/>
         <extension module="org.jboss.as.mail"/>
         <extension module="org.jboss.as.messaging"/>
@@ -31,6 +29,7 @@
         <extension module="org.jboss.as.webservices"/>
         <extension module="org.jboss.as.weld"/>
     </extensions>
+
     <management>
         <security-realms>
             <security-realm name="ManagementRealm">
@@ -53,6 +52,7 @@
             </http-interface>
         </management-interfaces>
     </management>
+
     <profile>
         <subsystem xmlns="urn:jboss:domain:logging:1.1">
             <console-handler name="CONSOLE">
@@ -84,6 +84,24 @@
             <logger category="jacorb.config">
                 <level name="ERROR"/>
             </logger>
+            <logger category="org.openiam">
+                <level name="DEBUG"/>
+            </logger>
+            <logger category="org.activiti">
+                <level name="DEBUG"/>
+            </logger>
+	    <logger category="org.apache">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.mule">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.hibernate">
+		<level name="WARN"/>
+	    </logger>
+	    <logger category="org.apache.cxf">
+		<level name="INFO"/>
+	    </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
@@ -92,27 +110,138 @@
                 </handlers>
             </root-logger>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:cmp:1.0"/>
         <subsystem xmlns="urn:jboss:domain:configadmin:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
-            <datasources>
-                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</connection-url>
-                    <driver>h2</driver>
+              <datasources>
+                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+                    <connection-url>jdbc:mysql://localhost:3306/openiam?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
+                    <driver>com.mysql</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>200</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
                     <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
+                        <user-name>idmuser</user-name>
+                        <password>idmuser</password>
                     </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
                 </datasource>
+                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
+                    <connection-url>jdbc:mysql://localhost:3306/activiti?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
+                    <driver>com.mysql</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>200</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>idmuser</user-name>
+                        <password>idmuser</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+              <!--
+                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+                    <connection-url>${org.openiam.datasource.openiam.jdbc.url}</connection-url>
+                    <driver>oracle.jdbc</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>${org.openiam.datasource.openiam.username}</user-name>
+                        <password>${org.openiam.datasource.openiam.password}</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
+                    <connection-url>${org.openiam.datasource.activiti.jdbc.url}</connection-url>
+                    <driver>oracle.jdbc</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>${org.openiam.datasource.activiti.username}</user-name>
+                        <password>${org.openiam.datasource.activiti.password}</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+            -->
+            <!--
+                <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+                    <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=openiam</connection-url>
+                    <driver>com.microsoft</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>openiam</user-name>
+                        <password>openiam70000</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+
+                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
+                    <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=activiti</connection-url>
+                    <driver>com.microsoft</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>openiam</user-name>
+                        <password>openiam70000</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+              -->
                 <drivers>
-                    <driver name="h2" module="com.h2database.h2">
-                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    <driver name="com.mysql" module="com.mysql">
+                        <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="oracle.jdbc" module="oracle.jdbc">
+                        <xa-datasource-class>oracle.jdbc.OracleDriver</xa-datasource-class>
+                    </driver>
+                    <driver name="com.microsoft" module="com.microsoft">
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
                     </driver>
                 </drivers>
+
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
-            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000"/>
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" auto-deploy-zipped="false" auto-deploy-exploded="false" scan-interval="5000" deployment-timeout="120000000"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:1.2">
@@ -151,7 +280,6 @@
                     <keepalive-time time="100" unit="milliseconds"/>
                 </thread-pool>
             </thread-pools>
-            <iiop enable-by-default="false" use-qualified-name="false"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:infinispan:1.2" default-cache-container="hibernate">
             <cache-container name="hibernate" default-cache="local-query">
@@ -171,13 +299,9 @@
                 </local-cache>
             </cache-container>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:jacorb:1.1">
-            <orb>
-                <initializers transactions="spec" security="on"/>
-            </orb>
-        </subsystem>
         <subsystem xmlns="urn:jboss:domain:jaxr:1.1">
             <connection-factory jndi-name="java:jboss/jaxr/ConnectionFactory"/>
+            <properties/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jaxrs:1.0"/>
         <subsystem xmlns="urn:jboss:domain:jca:1.1">
@@ -207,7 +331,6 @@
         <subsystem xmlns="urn:jboss:domain:jpa:1.0">
             <jpa default-datasource=""/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:jsr77:1.0"/>
         <subsystem xmlns="urn:jboss:domain:mail:1.0">
             <mail-session jndi-name="java:jboss/mail/Default">
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
@@ -218,6 +341,7 @@
                 <persistence-enabled>true</persistence-enabled>
                 <journal-file-size>102400</journal-file-size>
                 <journal-min-files>2</journal-min-files>
+
                 <connectors>
                     <netty-connector name="netty" socket-binding="messaging"/>
                     <netty-connector name="netty-throughput" socket-binding="messaging-throughput">
@@ -225,6 +349,7 @@
                     </netty-connector>
                     <in-vm-connector name="in-vm" server-id="0"/>
                 </connectors>
+
                 <acceptors>
                     <netty-acceptor name="netty" socket-binding="messaging"/>
                     <netty-acceptor name="netty-throughput" socket-binding="messaging-throughput">
@@ -233,16 +358,8 @@
                     </netty-acceptor>
                     <in-vm-acceptor name="in-vm" server-id="0"/>
                 </acceptors>
-                <security-settings>
-                    <security-setting match="#">
-                        <permission type="send" roles="guest"/>
-                        <permission type="consume" roles="guest"/>
-                        <permission type="createNonDurableQueue" roles="guest"/>
-                        <permission type="deleteNonDurableQueue" roles="guest"/>
-                    </security-setting>
-                </security-settings>
+
                 <address-settings>
-                    <!--default for catch all-->
                     <address-setting match="#">
                         <dead-letter-address>jms.queue.DLQ</dead-letter-address>
                         <expiry-address>jms.queue.ExpiryQueue</expiry-address>
@@ -252,6 +369,7 @@
                         <message-counter-history-day-limit>10</message-counter-history-day-limit>
                     </address-setting>
                 </address-settings>
+
                 <jms-connection-factories>
                     <connection-factory name="InVmConnectionFactory">
                         <connectors>
@@ -280,29 +398,41 @@
                         </entries>
                     </pooled-connection-factory>
                 </jms-connection-factories>
+
                 <jms-destinations>
                     <jms-queue name="testQueue">
                         <entry name="queue/test"/>
                         <entry name="java:jboss/exported/jms/queue/test"/>
                     </jms-queue>
-                    <jms-topic name="testTopic">
-                        <entry name="topic/test"/>
-                        <entry name="java:jboss/exported/jms/topic/test"/>
-                    </jms-topic>
+                    <jms-queue name="mailQueue">
+                        <entry name="queue/mail"/>
+                        <entry name="java:jboss/exported/jms/queue/mail"/>
+                    </jms-queue>
+		    <jms-queue name="logQueue">
+    			<entry name="queue/log"/>
+    			<entry name="java:jboss/exported/jms/queue/log"/>
+		    </jms-queue>
+                    <jms-queue name="provQueue">
+                        <entry name="queue/prov"/>
+                        <entry name="java:jboss/exported/jms/queue/prov"/>
+                    </jms-queue>
+                    <jms-queue name="subsQueue">
+                        <entry name="queue/subs"/>
+                        <entry name="java:jboss/exported/jms/queue/subs"/>
+                    </jms-queue>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:1.1"/>
         <subsystem xmlns="urn:jboss:domain:osgi:1.2" activation="lazy">
             <properties>
-                <!-- Specifies the beginning start level of the framework -->
-                <property name="org.osgi.framework.startlevel.beginning">1</property>
+                <property name="org.osgi.framework.startlevel.beginning">
+                    1
+                </property>
             </properties>
             <capabilities>
-                <!-- modules registered with the OSGi layer on startup -->
                 <capability name="javax.servlet.api:v25"/>
                 <capability name="javax.transaction.api"/>
-                <!-- bundles started in startlevel 1 -->
                 <capability name="org.apache.felix.log" startlevel="1"/>
                 <capability name="org.jboss.osgi.logging" startlevel="1"/>
                 <capability name="org.apache.felix.configadmin" startlevel="1"/>
@@ -371,39 +501,35 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:1.0"/>
     </profile>
+
     <interfaces>
         <interface name="management">
             <inet-address value="${jboss.bind.address.management:127.0.0.1}"/>
         </interface>
         <interface name="public">
-            <inet-address value="${jboss.bind.address:127.0.0.1}"/>
+            <inet-address value="${jboss.bind.address:0.0.0.0}"/>
         </interface>
-        <!-- TODO - only show this if the jacorb subsystem is added  -->
         <interface name="unsecure">
-            <!--
-              ~  Used for IIOP sockets in the standard configuration.
-              ~                  To secure JacORB you need to setup SSL 
-              -->
             <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
     </interfaces>
+
     <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
         <socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9443}"/>
-        <socket-binding name="ajp" port="8009"/>
-        <socket-binding name="http" port="8080"/>
-        <socket-binding name="https" port="8443"/>
-        <socket-binding name="jacorb" interface="unsecure" port="3528"/>
-        <socket-binding name="jacorb-ssl" interface="unsecure" port="3529"/>
+        <socket-binding name="ajp" port="9009"/>
+        <socket-binding name="http" port="9080"/>
+        <socket-binding name="https" port="9442"/>
         <socket-binding name="messaging" port="5445"/>
         <socket-binding name="messaging-throughput" port="5455"/>
-        <socket-binding name="osgi-http" interface="management" port="8090"/>
-        <socket-binding name="remoting" port="4447"/>
-        <socket-binding name="txn-recovery-environment" port="4712"/>
-        <socket-binding name="txn-status-manager" port="4713"/>
+        <socket-binding name="osgi-http" interface="management" port="9090"/>
+        <socket-binding name="remoting" port="9447"/>
+        <socket-binding name="txn-recovery-environment" port="9712"/>
+        <socket-binding name="txn-status-manager" port="9713"/>
         <outbound-socket-binding name="mail-smtp">
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
+
 </server>
