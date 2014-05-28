@@ -137,6 +137,45 @@
                         <share-prepared-statements>true</share-prepared-statements>
                     </statement>
                 </datasource>
+            <!--
+                <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+                    <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=openiam</connection-url>
+                    <driver>com.microsoft</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>openiam</user-name>
+                        <password>openiam70000</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+
+                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
+                    <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=activiti</connection-url>
+                    <driver>com.microsoft</driver>
+                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>openiam</user-name>
+                        <password>openiam70000</password>
+                    </security>
+                    <statement>
+                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+                        <share-prepared-statements>true</share-prepared-statements>
+                    </statement>
+                </datasource>
+              -->
                 <drivers>
                     <driver name="com.mysql" module="com.mysql">
                         <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
@@ -144,7 +183,11 @@
                     <driver name="oracle.jdbc" module="oracle.jdbc">
                         <xa-datasource-class>oracle.jdbc.OracleDriver</xa-datasource-class>
                     </driver>
+                    <driver name="com.microsoft" module="com.microsoft">
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
+                    </driver>
                 </drivers>
+
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
