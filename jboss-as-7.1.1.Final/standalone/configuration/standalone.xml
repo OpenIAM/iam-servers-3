@@ -420,6 +420,10 @@
                         <entry name="queue/subs"/>
                         <entry name="java:jboss/exported/jms/queue/subs"/>
                     </jms-queue>
+		    <jms-queue name="metaElemQueue">
+                        <entry name="queue/metaElem"/>
+                        <entry name="java:jboss/exported/jms/queue/metaElem"/>
+                    </jms-queue>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
