@@ -90,18 +90,18 @@
             <logger category="org.activiti">
                 <level name="DEBUG"/>
             </logger>
-	    <logger category="org.apache">
-		<level name="WARN"/>
-	    </logger>
-	    <logger category="org.mule">
-		<level name="WARN"/>
-	    </logger>
-	    <logger category="org.hibernate">
-		<level name="WARN"/>
-	    </logger>
-	    <logger category="org.apache.cxf">
-		<level name="INFO"/>
-	    </logger>
+            <logger category="org.apache">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.mule">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.hibernate">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.apache.cxf">
+                <level name="INFO"/>
+            </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
@@ -112,8 +112,8 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:configadmin:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
-              <datasources>
-                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
                     <connection-url>jdbc:mysql://localhost:3306/openiam?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
                     <driver>com.mysql</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
@@ -149,83 +149,6 @@
                         <share-prepared-statements>true</share-prepared-statements>
                     </statement>
                 </datasource>
-              <!--
-                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
-                    <connection-url>${org.openiam.datasource.openiam.jdbc.url}</connection-url>
-                    <driver>oracle.jdbc</driver>
-                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
-                    <pool>
-                        <min-pool-size>10</min-pool-size>
-                        <max-pool-size>100</max-pool-size>
-                        <prefill>true</prefill>
-                    </pool>
-                    <security>
-                        <user-name>${org.openiam.datasource.openiam.username}</user-name>
-                        <password>${org.openiam.datasource.openiam.password}</password>
-                    </security>
-                    <statement>
-                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
-                        <share-prepared-statements>true</share-prepared-statements>
-                    </statement>
-                </datasource>
-                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
-                    <connection-url>${org.openiam.datasource.activiti.jdbc.url}</connection-url>
-                    <driver>oracle.jdbc</driver>
-                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
-                    <pool>
-                        <min-pool-size>10</min-pool-size>
-                        <max-pool-size>100</max-pool-size>
-                        <prefill>true</prefill>
-                    </pool>
-                    <security>
-                        <user-name>${org.openiam.datasource.activiti.username}</user-name>
-                        <password>${org.openiam.datasource.activiti.password}</password>
-                    </security>
-                    <statement>
-                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
-                        <share-prepared-statements>true</share-prepared-statements>
-                    </statement>
-                </datasource>
-            -->
-            <!--
-                <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
-                    <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=openiam</connection-url>
-                    <driver>com.microsoft</driver>
-                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
-                    <pool>
-                        <min-pool-size>10</min-pool-size>
-                        <max-pool-size>100</max-pool-size>
-                        <prefill>true</prefill>
-                    </pool>
-                    <security>
-                        <user-name>openiam</user-name>
-                        <password>openiam70000</password>
-                    </security>
-                    <statement>
-                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
-                        <share-prepared-statements>true</share-prepared-statements>
-                    </statement>
-                </datasource>
-
-                <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
-                    <connection-url>jdbc:sqlserver://oaisd-sqle:1433;databaseName=activiti</connection-url>
-                    <driver>com.microsoft</driver>
-                    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
-                    <pool>
-                        <min-pool-size>10</min-pool-size>
-                        <max-pool-size>100</max-pool-size>
-                        <prefill>true</prefill>
-                    </pool>
-                    <security>
-                        <user-name>openiam</user-name>
-                        <password>openiam70000</password>
-                    </security>
-                    <statement>
-                        <prepared-statement-cache-size>32</prepared-statement-cache-size>
-                        <share-prepared-statements>true</share-prepared-statements>
-                    </statement>
-                </datasource>
-              -->
                 <drivers>
                     <driver name="com.mysql" module="com.mysql">
                         <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
@@ -237,11 +160,10 @@
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
                     </driver>
                 </drivers>
-
             </datasources>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
-            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" auto-deploy-zipped="false" auto-deploy-exploded="false" scan-interval="5000" deployment-timeout="120000000"/>
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" auto-deploy-zipped="false" auto-deploy-exploded="false" deployment-timeout="120000000"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:1.2">
@@ -408,10 +330,10 @@
                         <entry name="queue/mail"/>
                         <entry name="java:jboss/exported/jms/queue/mail"/>
                     </jms-queue>
-		    <jms-queue name="logQueue">
-    			<entry name="queue/log"/>
-    			<entry name="java:jboss/exported/jms/queue/log"/>
-		    </jms-queue>
+                    <jms-queue name="logQueue">
+                        <entry name="queue/log"/>
+                        <entry name="java:jboss/exported/jms/queue/log"/>
+                    </jms-queue>
                     <jms-queue name="provQueue">
                         <entry name="queue/prov"/>
                         <entry name="java:jboss/exported/jms/queue/prov"/>
@@ -419,6 +341,10 @@
                     <jms-queue name="subsQueue">
                         <entry name="queue/subs"/>
                         <entry name="java:jboss/exported/jms/queue/subs"/>
+                    </jms-queue>
+                    <jms-queue name="metaElemQueue">
+                        <entry name="queue/metaElem"/>
+                        <entry name="java:jboss/exported/jms/queue/metaElem"/>
                     </jms-queue>
                 </jms-destinations>
             </hornetq-server>
