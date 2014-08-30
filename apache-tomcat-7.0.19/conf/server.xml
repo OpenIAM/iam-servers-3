@@ -69,7 +69,7 @@
     -->
     <Connector address="0.0.0.0" port="8080" protocol="HTTP/1.1" 
                connectionTimeout="20000" 
-               redirectPort="8443" maxHttpHeaderSize="65536" />
+               redirectPort="8443" maxHttpHeaderSize="65536" URIEncoding="UTF-8" />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
