@@ -236,6 +236,9 @@
                     <driver name="com.microsoft" module="com.microsoft">
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
                     </driver>
+		    <driver name="net.sourceforge.jtds" module="net.sourceforge.jtds">
+                        <xa-datasource-class>net.sourceforge.jtds.jdbc.Driver</xa-datasource-class>
+                    </driver>
                 </drivers>
 
             </datasources>
