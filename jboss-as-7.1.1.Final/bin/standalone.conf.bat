@@ -70,4 +70,7 @@ rem set "JAVA_OPTS=%JAVA_OPTS% -Xrunjdwp:transport=dt_shmem,address=jboss,server
 rem # Use JBoss Modules lockless mode
 rem set "JAVA_OPTS=%JAVA_OPTS% -Djboss.modules.lockless=true"
 
+rem # Set conf directory
+set "JAVA_OPTS=%JAVA_OPTS% -Dconfpath=/data/openiam"
+
 :JAVA_OPTS_SET
