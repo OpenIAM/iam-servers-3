@@ -29,7 +29,7 @@
         <extension module="org.jboss.as.webservices"/>
         <extension module="org.jboss.as.weld"/>
     </extensions>
-    
+
     <system-properties>
         <property name="org.apache.catalina.connector.URI_ENCODING" value="UTF-8"/>
     </system-properties>
@@ -118,8 +118,8 @@
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/openiam" pool-name="openiam">
-                    <connection-url>jdbc:mysql://localhost:3306/openiam?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
-                    <driver>com.mysql</driver>
+                    <connection-url>jdbc:postgresql://localhost:5432/openiam</connection-url>
+                    <driver>postgresql-driver</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
                     <pool>
                         <min-pool-size>5</min-pool-size>
@@ -136,8 +136,8 @@
                     </statement>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/activiti" pool-name="activiti">
-                    <connection-url>jdbc:mysql://localhost:3306/activiti?useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
-                    <driver>com.mysql</driver>
+                    <connection-url>jdbc:postgresql://localhost:5432/activiti</connection-url>
+                    <driver>postgresql-driver</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
                     <pool>
                         <min-pool-size>5</min-pool-size>
@@ -163,7 +163,7 @@
                     <driver name="com.microsoft" module="com.microsoft">
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
                     </driver>
-		    <driver name="postgresql-driver" module="org.postgresql">
+                    <driver name="postgresql-driver" module="org.postgresql">
                         <xa-datasource-class>org.postgresql.Driver</xa-datasource-class>
                     </driver>
                 </drivers>
