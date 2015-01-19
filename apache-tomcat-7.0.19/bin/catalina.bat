@@ -189,6 +189,9 @@ set LOGGING_MANAGER=-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogMa
 :noJuliManager
 set JAVA_OPTS=%JAVA_OPTS% %LOGGING_MANAGER%
 
+set JAVA_OPTS=%JAVA_OPTS% -Xms512m -Xmx1024m -XX:ReservedCodeCacheSize=64m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000
+set JAVA_OPTS=%JAVA_OPTS% -Dconfpath=/data/openiam -Dbirt.viewer.folder=c:/data/openiam/upload/report -Dbirt.viewer.conf=/data/openiam/conf/repviewer.properties
+
 rem ----- Execute The Requested Command ---------------------------------------
 
 echo Using CATALINA_BASE:   "%CATALINA_BASE%"
