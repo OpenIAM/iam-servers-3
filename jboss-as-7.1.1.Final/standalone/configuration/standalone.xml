@@ -126,6 +126,9 @@
                         <max-pool-size>200</max-pool-size>
                         <prefill>true</prefill>
                     </pool>
+	  	    <timeout>
+                        <idle-timeout-minutes>30</idle-timeout-minutes>
+                    </timeout>
                     <security>
                         <user-name>idmuser</user-name>
                         <password>idmuser</password>
@@ -144,6 +147,9 @@
                         <max-pool-size>200</max-pool-size>
                         <prefill>true</prefill>
                     </pool>
+	  	    <timeout>
+                        <idle-timeout-minutes>30</idle-timeout-minutes>
+                    </timeout>
                     <security>
                         <user-name>idmuser</user-name>
                         <password>idmuser</password>
