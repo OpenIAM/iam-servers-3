@@ -359,6 +359,10 @@
                         <entry name="queue/metaElem"/>
                         <entry name="java:jboss/exported/jms/queue/metaElem"/>
                     </jms-queue>
+ 		    <jms-queue name="sourceAdapterQueue">
+                        <entry name="queue/saRequest" />
+                        <entry name="java:jboss/exported/jms/queue/saRequest" />
+                    </jms-queue>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
