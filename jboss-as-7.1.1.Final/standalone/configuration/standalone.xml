@@ -29,7 +29,7 @@
         <extension module="org.jboss.as.webservices"/>
         <extension module="org.jboss.as.weld"/>
     </extensions>
-    
+
     <system-properties>
         <property name="org.apache.catalina.connector.URI_ENCODING" value="UTF-8"/>
     </system-properties>
@@ -89,7 +89,7 @@
                 <level name="ERROR"/>
             </logger>
             <logger category="org.openiam">
-                <level name="DEBUG"/>
+                <level name="WARN"/>
             </logger>
             <logger category="org.activiti">
                 <level name="DEBUG"/>
@@ -163,7 +163,7 @@
                     <driver name="com.microsoft" module="com.microsoft">
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
                     </driver>
-		    <driver name="postgresql-driver" module="org.postgresql">
+                    <driver name="postgresql-driver" module="org.postgresql">
                         <xa-datasource-class>org.postgresql.Driver</xa-datasource-class>
                     </driver>
                 </drivers>
@@ -352,6 +352,10 @@
                     <jms-queue name="metaElemQueue">
                         <entry name="queue/metaElem"/>
                         <entry name="java:jboss/exported/jms/queue/metaElem"/>
+                    </jms-queue>
+                    <jms-queue name="sourceAdapterQueue">
+                        <entry name="queue/saRequest"/>
+                        <entry name="java:jboss/exported/jms/queue/saRequest"/>
                     </jms-queue>
                 </jms-destinations>
             </hornetq-server>
