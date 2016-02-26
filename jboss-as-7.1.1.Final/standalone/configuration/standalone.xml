@@ -166,6 +166,9 @@
                     <driver name="postgresql-driver" module="org.postgresql">
                         <xa-datasource-class>org.postgresql.Driver</xa-datasource-class>
                     </driver>
+                    <driver name="net.sf.log4jdbc" module="net.sf.log4jdbc">
+                        <xa-datasource-class>net.sf.log4jdbc.sql.jdbcapi.DriverSpy</xa-datasource-class>
+                    </driver>
                 </drivers>
             </datasources>
         </subsystem>
