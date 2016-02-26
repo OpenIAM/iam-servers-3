@@ -1,0 +1,17 @@
+
+net/sf/log4jdbc/log/slf4j
+META-INF/maven
+net/sf/log4jdbc/sql/resultsetcollector
+net/sf
+net/sf/log4jdbc
+net/sf/log4jdbc/sql
+net/sf/log4jdbc/log
+net/sf/log4jdbc/sql/jdbcapi
+net
+META-INF
+META-INF/maven/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4
+META-INF/maven/org.bgee.log4jdbc-log4j2
+META-INF/services
+net/sf/log4jdbc/log/log4j2/message
+net/sf/log4jdbc/log/log4j2
+net/sf/log4jdbc/sql/rdbmsspecifics
