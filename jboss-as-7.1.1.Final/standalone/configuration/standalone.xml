@@ -322,6 +322,14 @@
                         <entry name="queue/saRequest" />
                         <entry name="java:jboss/exported/jms/queue/saRequest" />
                     </jms-queue>
+          	    <jms-queue name="connectorQueue">
+                        <entry name="queue/connector" />
+                        <entry name="java:jboss/exported/jms/queue/connector" />
+                    </jms-queue>
+                    <jms-queue name="connectorResponseQueue">
+                        <entry name="queue/conresp" />
+                        <entry name="java:jboss/exported/jms/queue/conresp" />
+                    </jms-queue>
                 </jms-destinations>
             </hornetq-server>
         </subsystem>
